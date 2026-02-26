@@ -86,6 +86,115 @@
 
 // export default Header;
 
+// import React, { useState, useEffect } from 'react';
+// import Logo from "../assets/lukologo.png";
+// import { useGoogleLogin } from '@react-oauth/google';
+// import axios from 'axios';
+
+// const Header = () => {
+//   const [user, setUser] = useState(null);
+
+//   useEffect(() => {
+//     const savedUser = localStorage.getItem("user");
+//     if (savedUser) {
+//       setUser(JSON.parse(savedUser));
+//     }
+//   }, []);
+
+//   const login = useGoogleLogin({
+//     onSuccess: async (tokenResponse) => {
+//       try {
+//         // Aapki API call
+// const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/google-login`, {
+//   accessToken: tokenResponse.access_token,
+// });
+
+//         if (res.data.token) {
+//           localStorage.setItem("token", res.data.token);
+//           localStorage.setItem("user", JSON.stringify(res.data.user));
+//           setUser(res.data.user);
+//           alert("Login Successful!");
+//         }
+//       } catch (error) {
+//         console.error("Login Error:", error);
+//       }
+//     },
+//   });
+
+//   const handleLogout = () => {
+//     localStorage.removeItem("token");
+//     localStorage.removeItem("user");
+//     setUser(null);
+//   };
+
+//   return (
+//     <header className="w-full bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+//       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+//         <div className="flex justify-between items-center h-20 md:h-24">
+          
+//           {/* Logo */}
+//           <div className="flex-shrink-0">
+//             <a href="/">
+//               <img src={Logo} alt="Logo" className="h-12 md:h-16 w-auto" />
+//             </a>
+//           </div>
+
+//           {/* Navigation - Desktop */}
+//           <nav className="hidden md:flex space-x-8 items-center">
+//             <a href="#" className="text-[#1e3a5f] font-bold text-[13px] uppercase tracking-widest">Home</a>
+//             <a href="#" className="text-[#1e3a5f] font-bold text-[13px] uppercase tracking-widest">Laundry Pods</a>
+//             <a href="#" className="text-[#1e3a5f] font-bold text-[13px] uppercase tracking-widest">About Us</a>
+//           </nav>
+
+//           {/* Right Section: Icons + Sign Up Button */}
+//           <div className="flex items-center space-x-3 md:space-x-6">
+            
+//             {/* Search Icon */}
+//             <button className="text-[#1e3a5f] hover:text-blue-500">
+//               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6"><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+//             </button>
+
+//             {/* Cart Icon */}
+//             <button className="relative text-[#1e3a5f] hover:text-blue-500">
+//               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 md:w-7 md:h-7"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" /></svg>
+//               <span className="absolute -top-1 -right-2 bg-blue-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">0</span>
+//             </button>
+
+//             {/* SIGN UP / PROFILE SECTION */}
+//             <div className="flex items-center">
+//               {user ? (
+//                 // Agar Login hai to Profile dikhao
+//                 <div className="flex items-center gap-3 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-200">
+//                   <span className="text-[11px] font-bold text-[#1e3a5f] uppercase hidden sm:block">Hi, {user.name.split(' ')[0]}</span>
+//                   <button 
+//                     onClick={handleLogout}
+//                     className="text-[10px] font-bold text-red-500 hover:text-red-700 uppercase"
+//                   >
+//                     Logout
+//                   </button>
+//                 </div>
+//               ) : (
+//                 // Agar Login nahi hai to SIGN UP Button dikhao
+//                 <button 
+//                   onClick={() => login()}
+//                   className="bg-[#1e3a5f] text-white px-5 py-2.5 rounded-full text-[12px] font-bold uppercase tracking-widest hover:bg-blue-600 transition-all duration-300 shadow-md flex items-center gap-2"
+//                 >
+//                   <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/button/google.svg" alt="" className="w-4 h-4 bg-white rounded-full p-0.5" />
+//                   Sign Up
+//                 </button>
+//               )}
+//             </div>
+
+//           </div>
+//         </div>
+//       </div>
+//     </header>
+//   );
+// };
+
+// export default Header;
+
+
 import React, { useState, useEffect } from 'react';
 import Logo from "../assets/lukologo.png";
 import { useGoogleLogin } from '@react-oauth/google';
@@ -96,7 +205,7 @@ const Header = () => {
 
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
-    if (savedUser) {
+    if (savedUser && savedUser !== "undefined") {
       setUser(JSON.parse(savedUser));
     }
   }, []);
@@ -104,10 +213,9 @@ const Header = () => {
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {
-        // Aapki API call
-const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/google-login`, {
-  accessToken: tokenResponse.access_token,
-});
+        const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/google-login`, {
+          accessToken: tokenResponse.access_token,
+        });
 
         if (res.data.token) {
           localStorage.setItem("token", res.data.token);
@@ -117,6 +225,7 @@ const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/google-lo
         }
       } catch (error) {
         console.error("Login Error:", error);
+        alert("Login failed. Please try again.");
       }
     },
   });
@@ -132,40 +241,35 @@ const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/google-lo
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20 md:h-24">
           
-          {/* Logo */}
           <div className="flex-shrink-0">
             <a href="/">
               <img src={Logo} alt="Logo" className="h-12 md:h-16 w-auto" />
             </a>
           </div>
 
-          {/* Navigation - Desktop */}
           <nav className="hidden md:flex space-x-8 items-center">
             <a href="#" className="text-[#1e3a5f] font-bold text-[13px] uppercase tracking-widest">Home</a>
             <a href="#" className="text-[#1e3a5f] font-bold text-[13px] uppercase tracking-widest">Laundry Pods</a>
             <a href="#" className="text-[#1e3a5f] font-bold text-[13px] uppercase tracking-widest">About Us</a>
           </nav>
 
-          {/* Right Section: Icons + Sign Up Button */}
           <div className="flex items-center space-x-3 md:space-x-6">
-            
-            {/* Search Icon */}
             <button className="text-[#1e3a5f] hover:text-blue-500">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6"><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
             </button>
 
-            {/* Cart Icon */}
             <button className="relative text-[#1e3a5f] hover:text-blue-500">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 md:w-7 md:h-7"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" /></svg>
               <span className="absolute -top-1 -right-2 bg-blue-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">0</span>
             </button>
 
-            {/* SIGN UP / PROFILE SECTION */}
             <div className="flex items-center">
               {user ? (
-                // Agar Login hai to Profile dikhao
                 <div className="flex items-center gap-3 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-200">
-                  <span className="text-[11px] font-bold text-[#1e3a5f] uppercase hidden sm:block">Hi, {user.name.split(' ')[0]}</span>
+                  {/* FIX YAHAN HAI: Safely split name or use fallback 'User' */}
+                  <span className="text-[11px] font-bold text-[#1e3a5f] uppercase hidden sm:block">
+                    Hi, {user?.name ? user.name.split(' ')[0] : (user?.full_name ? user.full_name.split(' ')[0] : 'User')}
+                  </span>
                   <button 
                     onClick={handleLogout}
                     className="text-[10px] font-bold text-red-500 hover:text-red-700 uppercase"
@@ -174,7 +278,6 @@ const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/google-lo
                   </button>
                 </div>
               ) : (
-                // Agar Login nahi hai to SIGN UP Button dikhao
                 <button 
                   onClick={() => login()}
                   className="bg-[#1e3a5f] text-white px-5 py-2.5 rounded-full text-[12px] font-bold uppercase tracking-widest hover:bg-blue-600 transition-all duration-300 shadow-md flex items-center gap-2"
@@ -184,7 +287,6 @@ const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/google-lo
                 </button>
               )}
             </div>
-
           </div>
         </div>
       </div>
