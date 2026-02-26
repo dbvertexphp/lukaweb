@@ -90,9 +90,31 @@ import React, { useState, useEffect } from 'react';
 import Logo from "../assets/lukologo.png";
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [user, setUser] = useState(null);
+  const [cartCount, setCartCount] = useState(0);
+  const navigate = useNavigate();
+
+  // Function jo cart count update karega
+  const updateCartCount = () => {
+    const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    // Total items count karne ke liye (quantity ke saath)
+    const totalItems = savedCart.reduce((acc, item) => acc + (item.quantity || 1), 0);
+    setCartCount(totalItems);
+  };
+
+  useEffect(() => {
+    // Pehli baar load hone par
+    updateCartCount();
+
+    // Jab dusre pages se 'storage' event trigger ho (jaise aapne Checkout mein kiya hai)
+    window.addEventListener('storage', updateCartCount);
+
+    // Cleanup
+    return () => window.removeEventListener('storage', updateCartCount);
+  }, []);
 
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
@@ -141,8 +163,8 @@ const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/google-lo
 
           {/* Navigation - Desktop */}
           <nav className="hidden md:flex space-x-8 items-center">
-            <a href="#" className="text-[#1e3a5f] font-bold text-[13px] uppercase tracking-widest">Home</a>
-            <a href="#" className="text-[#1e3a5f] font-bold text-[13px] uppercase tracking-widest">Laundry Pods</a>
+            <a href="/" className="text-[#1e3a5f] font-bold text-[13px] uppercase tracking-widest">Home</a>
+            <a href="shop" className="text-[#1e3a5f] font-bold text-[13px] uppercase tracking-widest">Laundry Pods</a>
             <a href="#" className="text-[#1e3a5f] font-bold text-[13px] uppercase tracking-widest">About Us</a>
           </nav>
 
@@ -155,10 +177,24 @@ const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/google-lo
             </button>
 
             {/* Cart Icon */}
-            <button className="relative text-[#1e3a5f] hover:text-blue-500">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 md:w-7 md:h-7"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" /></svg>
-              <span className="absolute -top-1 -right-2 bg-blue-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">0</span>
-            </button>
+           <button 
+        onClick={() => navigate('/cart')} // Yaha apne cart page ka path likhein
+        className="relative text-[#1e3a5f] hover:text-blue-500 transition-colors"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 md:w-7 md:h-7">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+        </svg>
+
+        {/* Dynamic Count Badge */}
+        {cartCount > 0 && (
+          <span className="absolute -top-1 -right-2 bg-blue-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+            {cartCount}
+          </span>
+        )}
+      </button>
+      <a href="/orders" className="font-bold text-sm uppercase tracking-widest">
+  My Orders 📦
+</a>
 
             {/* SIGN UP / PROFILE SECTION */}
             <div className="flex items-center">

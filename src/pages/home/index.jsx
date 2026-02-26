@@ -323,22 +323,49 @@
 
 // export default Home;
 
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import Header from '../../components/header';
 import Product from "../products/index"
 import Footer from "../../components/Footer"
-
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 const Home = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [activeFaq, setActiveFaq] = useState(null);
+  const navigate = useNavigate();
+  const baseURL = "https://api.lukapods.graphicsvolume.com";
 
-  const products = [
-    { id: 1, name: "Laundry Detergent Pods - All-in-1 Stain Removal", price: "1,899.00", oldPrice: "4,200.00", discount: "54%", rating: "4.75", reviews: "801", image: "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?auto=format&fit=crop&q=80&w=800" },
-    { id: 2, name: "Floor Cleaner Refill - Pet & Kid Safe Formula", price: "249.00", oldPrice: "500.00", discount: "50%", rating: "4.8", reviews: "450", image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800" },
-    { id: 3, name: "Dishwash Power Pods - Tough Grease Remover", price: "349.00", oldPrice: "750.00", discount: "53%", rating: "4.9", reviews: "320", image: "https://thumbs.dreamstime.com/b/easy-to-edit-vector-illustration-advertisement-banner-stain-dirt-remover-powder-laundry-detergent-clean-fresh-118043412.jpg" },
-    { id: 4, name: "Multi-Surface Spray - Organic Shine", price: "199.00", oldPrice: "400.00", discount: "50%", rating: "4.6", reviews: "210", image: "https://images.unsplash.com/photo-1528740561666-dc2479dc08ab?auto=format&fit=crop&q=80&w=800" },
-  ];
+  // const products = [
+  //   { id: 1, name: "Laundry Detergent Pods - All-in-1 Stain Removal", price: "1,899.00", oldPrice: "4,200.00", discount: "54%", rating: "4.75", reviews: "801", image: "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?auto=format&fit=crop&q=80&w=800" },
+  //   { id: 2, name: "Floor Cleaner Refill - Pet & Kid Safe Formula", price: "249.00", oldPrice: "500.00", discount: "50%", rating: "4.8", reviews: "450", image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800" },
+  //   { id: 3, name: "Dishwash Power Pods - Tough Grease Remover", price: "349.00", oldPrice: "750.00", discount: "53%", rating: "4.9", reviews: "320", image: "https://thumbs.dreamstime.com/b/easy-to-edit-vector-illustration-advertisement-banner-stain-dirt-remover-powder-laundry-detergent-clean-fresh-118043412.jpg" },
+  //   { id: 4, name: "Multi-Surface Spray - Organic Shine", price: "199.00", oldPrice: "400.00", discount: "50%", rating: "4.6", reviews: "210", image: "https://images.unsplash.com/photo-1528740561666-dc2479dc08ab?auto=format&fit=crop&q=80&w=800" },
+  // ];
+  
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+ useEffect(() => {
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      // Sahi API path: /api/user/product/all (Jo aapne backend routes mein set kiya tha)
+      const response = await axios.get(`${baseURL}/api/user/product/all`);
+      
+      // Backend response check: response.data.status aur response.data.products
+      if (response.data && response.data.products) {
+        // Hum sirf pehle 4 products dikhana chahte hain
+        console.log("Full First Product Object:", response.data.products[0]);
+        setProducts(response.data.products.slice(0, 4)); 
+      }
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  fetchProducts();
+}, []);
   const faqData = [
     { question: "Will LUKA PODS work with my specific washing machine type?", answer: "Absolutely! LUKA PODS are engineered for versatility. They are 100% compatible with both Top-load and Front-load fully automatic machines." },
     { question: "Do I need hot water to dissolve these pods?", answer: "Not at all. Our advanced fast-dissolving film technology melts away completely in any water temperature." },
@@ -380,9 +407,12 @@ const Home = () => {
           <h1 className="text-white text-4xl md:text-6xl font-black mb-8 tracking-tighter text-center px-4 uppercase italic">
             Revolutionizing Your <br/> Home Laundry
           </h1>
-          <button className="bg-white text-[#1e3a5f] px-12 py-4 rounded-full font-black text-xs md:text-sm uppercase tracking-[0.3em] shadow-2xl hover:bg-[#1e3a5f] hover:text-white transition-all transform hover:scale-110">
-            Explore Collections
-          </button>
+       <button 
+  onClick={() => navigate('/shop')} // Yahan apne product list ka route dalein (e.g., /products ya /shop)
+  className="bg-white text-[#1e3a5f] px-12 py-4 rounded-full font-black text-xs md:text-sm uppercase tracking-[0.3em] shadow-2xl hover:bg-[#1e3a5f] hover:text-white transition-all transform hover:scale-110"
+>
+  Explore Collections
+</button>
         </div>
       </section>
 
@@ -443,7 +473,7 @@ const Home = () => {
       </section>
 
       {/* 7. Product Grid */}
-      <section className="max-w-7xl mx-auto px-4 py-24 bg-white">
+      {/* <section className="max-w-7xl mx-auto px-4 py-24 bg-white">
         <div className="flex flex-col items-center mb-16 text-center">
             <h2 className="text-4xl md:text-5xl font-black text-[#1e3a5f] uppercase tracking-tighter italic">Featured Collection</h2>
             <div className="w-24 h-2 bg-[#4b70e2] mt-4 rounded-full"></div>
@@ -467,6 +497,140 @@ const Home = () => {
               </div>
             ))}
         </div>
+      </section> */}
+    
+      {/* <section className="max-w-7xl mx-auto px-4 py-24 bg-white">
+  <div className="flex flex-col items-center mb-16 text-center">
+      <h2 className="text-4xl md:text-5xl font-black text-[#1e3a5f] uppercase tracking-tighter italic">Featured Collection</h2>
+      <div className="w-24 h-2 bg-[#4b70e2] mt-4 rounded-full"></div>
+  </div>
+  
+  {loading ? (
+    <div className="text-center font-black py-20">Loading Lukapods...</div>
+  ) : (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+        {products.map((product) => {
+          // Image logic: Agar image full URL nahi hai toh baseURL jodein
+          const imageUrl = product.product_images && product.product_images[0] 
+            ? product.product_images[0].startsWith('http') 
+              ? product.product_images[0] 
+              : `${baseURL}/${product.product_images[0]}`
+            : 'https://via.placeholder.com/300'; // Fallback image
+
+          return (
+            <div 
+              key={product._id} 
+              onClick={() => setSelectedProduct(product)}
+              className="bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer group border border-gray-100 flex flex-col"
+            >
+              <div className="h-96 overflow-hidden bg-[#f9f9f9] p-8 flex items-center justify-center">
+                <img 
+                  src={imageUrl} 
+                  alt={product.name} 
+                  className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-700 mix-blend-multiply" 
+                />
+              </div>
+              <div className="p-10 text-center flex-grow flex flex-col justify-between">
+                <div>
+                  <h3 className="text-[12px] font-black text-[#1e3a5f] mb-4 uppercase tracking-tighter line-clamp-2">
+                    {product.name}
+                  </h3>
+                  <div className="mb-6">
+                    <span className="text-[#d91e18] text-2xl font-black italic tracking-tighter">
+                      Rs. {product.price}
+                    </span>
+                  </div>
+                </div>
+                <button className="bg-[#1e3a5f] text-white w-full py-4 rounded-full font-black hover:bg-[#4b70e2] transition-all uppercase text-[10px] tracking-widest shadow-lg">
+                  Buy Now
+                </button>
+              </div>
+            </div>
+          );
+        })}
+    </div>
+  )}
+</section> */}
+<section className="max-w-7xl mx-auto px-4 py-24 bg-white">
+        <div className="flex flex-col items-center mb-16 text-center">
+          <h2 className="text-4xl md:text-5xl font-black text-[#1e3a5f] uppercase tracking-tighter italic">
+            Featured Collection
+          </h2>
+          <div className="w-24 h-2 bg-[#4b70e2] mt-4 rounded-full"></div>
+        </div>
+
+        {loading ? (
+          <div className="text-center font-black py-20 text-[#1e3a5f] animate-pulse">
+            Loading Lukapods...
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+            {products.map((product) => {
+              // 1. Image logic
+              const imageUrl = product.product_images && product.product_images[0]
+                ? product.product_images[0].startsWith('http')
+                  ? product.product_images[0]
+                  : `${baseURL}/${product.product_images[0]}`
+                : 'https://via.placeholder.com/300';
+
+              // 2. Variable Mapping according to your Schema
+              const pName = product.product_name || "Luka Cleaning Pod";
+              const pDesc = product.product_description 
+  ? product.product_description.replace(/<[^>]*>/g, '') 
+  : "Eco-friendly cleaning solution.";
+              const pPrice = product.price || 0;
+              // Synthetic old price (25% extra) for visual discount
+              const pOldPrice = Math.round(pPrice * 1.25);
+
+              return (
+                <div
+                  key={product._id}
+                  onClick={() => setSelectedProduct(product)}
+                  className="bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer group border border-gray-100 flex flex-col relative"
+                >
+                  {/* Discount Badge */}
+                  <div className="absolute top-6 left-6 z-10 bg-[#d91e18] text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-lg">
+                    20% OFF
+                  </div>
+
+                  {/* Product Image */}
+                  <div className="h-80 overflow-hidden bg-[#f9f9f9] p-8 flex items-center justify-center">
+                    <img
+                      src={imageUrl}
+                      alt={pName}
+                      className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-700 mix-blend-multiply"
+                    />
+                  </div>
+
+                  {/* Product Details */}
+                  <div className="p-8 text-center flex-grow flex flex-col justify-between">
+                    <div>
+                      <h3 className="text-[13px] font-black text-[#1e3a5f] mb-2 uppercase tracking-tighter line-clamp-1">
+                        {pName}
+                      </h3>
+                      <p className="text-[10px] text-gray-400 mb-4 line-clamp-2 leading-relaxed px-2">
+                        {pDesc}
+                      </p>
+
+                      <div className="mb-6 flex flex-col items-center justify-center">
+                        <span className="text-gray-300 line-through text-[11px] font-bold">
+                          Rs. {pOldPrice}
+                        </span>
+                        <span className="text-[#d91e18] text-2xl font-black italic tracking-tighter">
+                          Rs. {pPrice}
+                        </span>
+                      </div>
+                    </div>
+
+                    <button className="bg-[#1e3a5f] text-white w-full py-4 rounded-full font-black hover:bg-[#4b70e2] transition-all uppercase text-[10px] tracking-widest shadow-lg transform active:scale-95">
+                    View Product
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </section>
 
       {/* --- 8. INGREDIENT HIGHLIGHT (NEW) --- */}
