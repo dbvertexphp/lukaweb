@@ -323,52 +323,469 @@
 
 // export default Home;
 
-import React, { useState, useEffect} from 'react';
+// import React, { useState, useEffect} from 'react';
+// import Header from '../../components/header';
+// import Product from "../products/index"
+// import Footer from "../../components/Footer"
+// import axios from 'axios';
+// import { useNavigate } from 'react-router-dom';
+// const Home = () => {
+//   const [selectedProduct, setSelectedProduct] = useState(null);
+//   const [activeFaq, setActiveFaq] = useState(null);
+//   const navigate = useNavigate();
+//   // const baseURL = "https://api.lukapods.graphicsvolume.com";
+//   const baseURL = window.location.hostname === "localhost"
+//   ? "http://localhost:4170"                    // Jab aap PC par kaam kar rahe ho
+//   : "https://api.lukapods.graphicsvolume.com";
+
+//   // const products = [
+//   //   { id: 1, name: "Laundry Detergent Pods - All-in-1 Stain Removal", price: "1,899.00", oldPrice: "4,200.00", discount: "54%", rating: "4.75", reviews: "801", image: "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?auto=format&fit=crop&q=80&w=800" },
+//   //   { id: 2, name: "Floor Cleaner Refill - Pet & Kid Safe Formula", price: "249.00", oldPrice: "500.00", discount: "50%", rating: "4.8", reviews: "450", image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800" },
+//   //   { id: 3, name: "Dishwash Power Pods - Tough Grease Remover", price: "349.00", oldPrice: "750.00", discount: "53%", rating: "4.9", reviews: "320", image: "https://thumbs.dreamstime.com/b/easy-to-edit-vector-illustration-advertisement-banner-stain-dirt-remover-powder-laundry-detergent-clean-fresh-118043412.jpg" },
+//   //   { id: 4, name: "Multi-Surface Spray - Organic Shine", price: "199.00", oldPrice: "400.00", discount: "50%", rating: "4.6", reviews: "210", image: "https://images.unsplash.com/photo-1528740561666-dc2479dc08ab?auto=format&fit=crop&q=80&w=800" },
+//   // ];
+  
+//   const [products, setProducts] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//  useEffect(() => {
+//   const fetchProducts = async () => {
+//     try {
+//       setLoading(true);
+//       // Sahi API path: /api/user/product/all (Jo aapne backend routes mein set kiya tha)
+//       const response = await axios.get(`${baseURL}/api/user/product/all`);
+      
+//       // Backend response check: response.data.status aur response.data.products
+//       if (response.data && response.data.products) {
+//         // Hum sirf pehle 4 products dikhana chahte hain
+//         console.log("Full First Product Object:", response.data.products[0]);
+//         setProducts(response.data.products.slice(0, 4)); 
+//       }
+//     } catch (error) {
+//       console.error("Error fetching products:", error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   fetchProducts();
+// }, []);
+//   const faqData = [
+//     { question: "Will LUKA PODS work with my specific washing machine type?", answer: "Absolutely! LUKA PODS are engineered for versatility. They are 100% compatible with both Top-load and Front-load fully automatic machines." },
+//     { question: "Do I need hot water to dissolve these pods?", answer: "Not at all. Our advanced fast-dissolving film technology melts away completely in any water temperature." },
+//     { question: "Is LUKA PODS safe for my delicate clothing?", answer: "Yes, they are tough on stains but gentle on fibers. For premium silk or wool, always check the garment's care label first." },
+//     { question: "How many pods do I need for a full laundry basket?", answer: "Just one pod for a regular 8kg load. For heavily soiled clothes, use two pods for best results." },
+//     { question: "What makes LUKA PODS an eco-conscious choice?", answer: "LUKA PODS are plastic-free, biodegradable, and powered by plant-based bio-enzymes that clean without harming the environment." }
+//   ];
+
+//   const switchReasons = [
+//     { id: 1, title: "Authentic reviews by Influencers", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQi0W4l40kU2xlb7fknstvgtIZCXEorKDL8g&s" },
+//     { id: 2, title: "Bioenzymes-Infused Stain Removers", img: "https://images.unsplash.com/photo-1563453392212-326f5e854473?q=80&w=500" },
+//     { id: 3, title: "Long-Lasting Fragrance", img: "https://images.unsplash.com/photo-1559131397-f94da358f7ca?q=80&w=500" },
+//     { id: 4, title: "No Residue", img: "https://img.freepik.com/free-photo/domestis-duties-work-concept_273609-23995.jpg?semt=ais_user_personalization&w=740&q=80" },
+//   ];
+
+//   if (selectedProduct) {
+//     return <Product product={selectedProduct} onBack={() => setSelectedProduct(null)} />;
+//   }
+
+//   return (
+//     <div className="min-h-screen w-full bg-white m-0 p-0 overflow-x-hidden">
+//       {/* 1. Announcement Bar */}
+
+
+//       <Header />
+
+//       {/* 3. HERO BANNER */}
+//       <section className="relative w-full h-[500px] md:h-[700px] bg-gray-200 overflow-hidden">
+//         <img 
+//           src="https://img.freepik.com/free-photo/indoor-shot-happy-european-lady-with-overjoyed-expression-keeps-mouth-opened-crosses-hand-indicates-two-sides-detergents_273609-24908.jpg?semt=ais_user_personalization&w=740&q=80" 
+//           alt="Lukapods Banner" 
+//           className="w-full h-full object-cover"
+//         />
+//         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex flex-col items-center justify-end pb-20">
+//           <h1 className="text-white text-4xl md:text-6xl font-black mb-8 tracking-tighter text-center px-4 uppercase italic">
+//             Revolutionizing Your <br/> Home Laundry
+//           </h1>
+//        <button 
+//   onClick={() => navigate('/shop')} // Yahan apne product list ka route dalein (e.g., /products ya /shop)
+//   className="bg-white text-[#1e3a5f] px-12 py-4 rounded-full font-black text-xs md:text-sm uppercase tracking-[0.3em] shadow-2xl hover:bg-[#1e3a5f] hover:text-white transition-all transform hover:scale-110"
+// >
+//   Explore Collections
+// </button>
+//         </div>
+//       </section>
+
+//       {/* 4. Impact Stats Bar (NEW) */}
+//       <section className="w-full bg-[#1e3a5f] py-10 text-white">
+//         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+//             <div><p className="text-3xl font-black italic">5000+</p><p className="text-[10px] uppercase tracking-widest font-bold opacity-70">Plastic Bottles Saved</p></div>
+//             <div><p className="text-3xl font-black italic">10K+</p><p className="text-[10px] uppercase tracking-widest font-bold opacity-70">Happy Households</p></div>
+//             <div><p className="text-3xl font-black italic">100%</p><p className="text-[10px] uppercase tracking-widest font-bold opacity-70">Biodegradable Formula</p></div>
+//             <div><p className="text-3xl font-black italic">No</p><p className="text-[10px] uppercase tracking-widest font-bold opacity-70">Harmful Residues</p></div>
+//         </div>
+//       </section>
+
+//       {/* 5. Why Switch Section */}
+//       <section className="w-full bg-white py-24">
+//         <div className="max-w-[1400px] mx-auto px-4 text-center">
+//           <h2 className="text-[#1e3a5f] text-3xl md:text-5xl font-black mb-16 tracking-tighter uppercase italic">
+//              Why LUKA is Smarter Than Liquid
+//           </h2>
+//           <div className="flex overflow-x-auto gap-8 pb-10 no-scrollbar snap-x px-4">
+//             {switchReasons.map((item) => (
+//               <div key={item.id} className="min-w-[280px] lg:flex-1 snap-start group">
+//                 <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border border-gray-100 mb-6">
+//                   <img src={item.img} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+//                 </div>
+//                 <h4 className="text-xs font-black text-[#1e3a5f] uppercase tracking-widest px-4">{item.title}</h4>
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* --- 6. THE PROCESS: DROP, LOAD, WASH (NEW) --- */}
+//       <section className="w-full bg-[#f8faff] py-24 px-4">
+//           <div className="max-w-6xl mx-auto">
+//              <h2 className="text-center text-3xl font-black text-[#1e3a5f] mb-16 uppercase italic">Simple. Effective. Effortless.</h2>
+//              <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+//                 {/* Visual Connector Line for Desktop */}
+//                 <div className="hidden md:block absolute top-12 left-20 right-20 h-0.5 bg-blue-200 dashed"></div>
+                
+//                 <div className="text-center relative z-10">
+//                     <div className="w-24 h-24 bg-[#4b70e2] text-white rounded-full mx-auto flex items-center justify-center text-3xl font-black shadow-xl mb-6 ring-8 ring-white">01</div>
+//                     <h4 className="font-black uppercase text-sm mb-2">Drop</h4>
+//                     <p className="text-xs text-gray-400 px-6">Place one pod in the back of the empty drum.</p>
+//                 </div>
+//                 <div className="text-center relative z-10">
+//                     <div className="w-24 h-24 bg-[#4b70e2] text-white rounded-full mx-auto flex items-center justify-center text-3xl font-black shadow-xl mb-6 ring-8 ring-white">02</div>
+//                     <h4 className="font-black uppercase text-sm mb-2">Load</h4>
+//                     <p className="text-xs text-gray-400 px-6">Add your laundry on top of the LUKA pod.</p>
+//                 </div>
+//                 <div className="text-center relative z-10">
+//                     <div className="w-24 h-24 bg-[#4b70e2] text-white rounded-full mx-auto flex items-center justify-center text-3xl font-black shadow-xl mb-6 ring-8 ring-white">03</div>
+//                     <h4 className="font-black uppercase text-sm mb-2">Wash</h4>
+//                     <p className="text-xs text-gray-400 px-6">Start any cycle. It dissolves instantly!</p>
+//                 </div>
+//              </div>
+//           </div>
+//       </section>
+
+//       {/* 7. Product Grid */}
+//       {/* <section className="max-w-7xl mx-auto px-4 py-24 bg-white">
+//         <div className="flex flex-col items-center mb-16 text-center">
+//             <h2 className="text-4xl md:text-5xl font-black text-[#1e3a5f] uppercase tracking-tighter italic">Featured Collection</h2>
+//             <div className="w-24 h-2 bg-[#4b70e2] mt-4 rounded-full"></div>
+//         </div>
+        
+//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+//             {products.map((product) => (
+//               <div 
+//                 key={product.id}
+//                 onClick={() => setSelectedProduct(product)}
+//                 className="bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer group border border-gray-100 flex flex-col"
+//               >
+//                 <div className="h-96 overflow-hidden bg-[#f9f9f9] p-8">
+//                   <img src={product.image} alt={product.name} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 mix-blend-multiply" />
+//                 </div>
+//                 <div className="p-10 text-center flex-grow flex flex-col justify-between">
+//                   <h3 className="text-[12px] font-black text-[#1e3a5f] mb-4 uppercase tracking-tighter">{product.name}</h3>
+//                   <div className="mb-6"><span className="text-gray-300 line-through text-xs font-bold mr-3">Rs. {product.oldPrice}</span><span className="text-[#d91e18] text-2xl font-black italic tracking-tighter">Rs. {product.price}</span></div>
+//                   <button className="bg-[#1e3a5f] text-white w-full py-4 rounded-full font-black hover:bg-[#4b70e2] transition-all uppercase text-[10px] tracking-widest shadow-lg">Buy Now</button>
+//                 </div>
+//               </div>
+//             ))}
+//         </div>
+//       </section> */}
+    
+//       {/* <section className="max-w-7xl mx-auto px-4 py-24 bg-white">
+//   <div className="flex flex-col items-center mb-16 text-center">
+//       <h2 className="text-4xl md:text-5xl font-black text-[#1e3a5f] uppercase tracking-tighter italic">Featured Collection</h2>
+//       <div className="w-24 h-2 bg-[#4b70e2] mt-4 rounded-full"></div>
+//   </div>
+  
+//   {loading ? (
+//     <div className="text-center font-black py-20">Loading Lukapods...</div>
+//   ) : (
+//     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+//         {products.map((product) => {
+//           // Image logic: Agar image full URL nahi hai toh baseURL jodein
+//           const imageUrl = product.product_images && product.product_images[0] 
+//             ? product.product_images[0].startsWith('http') 
+//               ? product.product_images[0] 
+//               : `${baseURL}/${product.product_images[0]}`
+//             : 'https://via.placeholder.com/300'; // Fallback image
+
+//           return (
+//             <div 
+//               key={product._id} 
+//               onClick={() => setSelectedProduct(product)}
+//               className="bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer group border border-gray-100 flex flex-col"
+//             >
+//               <div className="h-96 overflow-hidden bg-[#f9f9f9] p-8 flex items-center justify-center">
+//                 <img 
+//                   src={imageUrl} 
+//                   alt={product.name} 
+//                   className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-700 mix-blend-multiply" 
+//                 />
+//               </div>
+//               <div className="p-10 text-center flex-grow flex flex-col justify-between">
+//                 <div>
+//                   <h3 className="text-[12px] font-black text-[#1e3a5f] mb-4 uppercase tracking-tighter line-clamp-2">
+//                     {product.name}
+//                   </h3>
+//                   <div className="mb-6">
+//                     <span className="text-[#d91e18] text-2xl font-black italic tracking-tighter">
+//                       Rs. {product.price}
+//                     </span>
+//                   </div>
+//                 </div>
+//                 <button className="bg-[#1e3a5f] text-white w-full py-4 rounded-full font-black hover:bg-[#4b70e2] transition-all uppercase text-[10px] tracking-widest shadow-lg">
+//                   Buy Now
+//                 </button>
+//               </div>
+//             </div>
+//           );
+//         })}
+//     </div>
+//   )}
+// </section> */}
+// <section className="max-w-7xl mx-auto px-4 py-24 bg-white">
+//         <div className="flex flex-col items-center mb-16 text-center">
+//           <h2 className="text-4xl md:text-5xl font-black text-[#1e3a5f] uppercase tracking-tighter italic">
+//             Featured Collection
+//           </h2>
+//           <div className="w-24 h-2 bg-[#4b70e2] mt-4 rounded-full"></div>
+//         </div>
+
+//         {loading ? (
+//           <div className="text-center font-black py-20 text-[#1e3a5f] animate-pulse">
+//             Loading Lukapods...
+//           </div>
+//         ) : (
+//           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+//             {products.map((product) => {
+//               // 1. Image logic
+//               const imageUrl = product.product_images && product.product_images[0]
+//                 ? product.product_images[0].startsWith('http')
+//                   ? product.product_images[0]
+//                   : `${baseURL}/${product.product_images[0]}`
+//                 : 'https://via.placeholder.com/300';
+
+//               // 2. Variable Mapping according to your Schema
+//               const pName = product.product_name || "Luka Cleaning Pod";
+//               const pDesc = product.product_description 
+//   ? product.product_description.replace(/<[^>]*>/g, '') 
+//   : "Eco-friendly cleaning solution.";
+//               const pPrice = product.price || 0;
+//               // Synthetic old price (25% extra) for visual discount
+//               const pOldPrice = Math.round(pPrice * 1.25);
+
+//               return (
+//                 <div
+//                   key={product._id}
+//                   onClick={() => setSelectedProduct(product)}
+//                   className="bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer group border border-gray-100 flex flex-col relative"
+//                 >
+//                   {/* Discount Badge */}
+//                   <div className="absolute top-6 left-6 z-10 bg-[#d91e18] text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-lg">
+//                     20% OFF
+//                   </div>
+
+//                   {/* Product Image */}
+//                   <div className="h-80 overflow-hidden bg-[#f9f9f9] p-8 flex items-center justify-center">
+//                     <img
+//                       src={imageUrl}
+//                       alt={pName}
+//                       className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-700 mix-blend-multiply"
+//                     />
+//                   </div>
+
+//                   {/* Product Details */}
+//                   <div className="p-8 text-center flex-grow flex flex-col justify-between">
+//                     <div>
+//                       <h3 className="text-[13px] font-black text-[#1e3a5f] mb-2 uppercase tracking-tighter line-clamp-1">
+//                         {pName}
+//                       </h3>
+//                       <p className="text-[10px] text-gray-400 mb-4 line-clamp-2 leading-relaxed px-2">
+//                         {pDesc}
+//                       </p>
+
+//                       <div className="mb-6 flex flex-col items-center justify-center">
+//                         <span className="text-gray-300 line-through text-[11px] font-bold">
+//                           Rs. {pOldPrice}
+//                         </span>
+//                         <span className="text-[#d91e18] text-2xl font-black italic tracking-tighter">
+//                           Rs. {pPrice}
+//                         </span>
+//                       </div>
+//                     </div>
+
+//                     <button className="bg-[#1e3a5f] text-white w-full py-4 rounded-full font-black hover:bg-[#4b70e2] transition-all uppercase text-[10px] tracking-widest shadow-lg transform active:scale-95">
+//                     View Product
+//                     </button>
+//                   </div>
+//                 </div>
+//               );
+//             })}
+//           </div>
+//         )}
+//       </section>
+
+//       {/* --- 8. INGREDIENT HIGHLIGHT (NEW) --- */}
+//       <section className="w-full bg-[#1e3a5f] py-24 text-white">
+//          <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+//             <div>
+//                <h2 className="text-4xl font-black uppercase italic mb-8">What's Inside LUKA?</h2>
+//                <p className="text-white/70 mb-10 text-sm leading-relaxed">No secret toxins. No hidden chemicals. Just pure cleaning power derived from nature's strongest enzymes.</p>
+//                <div className="space-y-6">
+//                   {["Natural Bio-Enzymes for Stain Extraction", "Plant-based Surfactants for Gentle Wash", "Biodegradable Fast-Dissolving Film", "Skin-Safe Organic Fragrance"].map((text, i) => (
+//                     <div key={i} className="flex items-center gap-4"><span className="text-[#4b70e2] text-xl">✔</span> <span className="font-bold text-xs uppercase tracking-widest">{text}</span></div>
+//                   ))}
+//                </div>
+//             </div>
+//             <div className="bg-white/10 p-1 rounded-[4rem] backdrop-blur-sm">
+//                 <img src="https://images.unsplash.com/photo-1559131397-f94da358f7ca?q=80&w=800" className="w-full h-full rounded-[4rem] object-cover opacity-90 shadow-2xl" alt="Inside Luka" />
+//             </div>
+//          </div>
+//       </section>
+
+//       {/* --- 9. CUSTOMER TESTIMONIALS (NEW) --- */}
+//       <section className="w-full bg-white py-24 px-4 overflow-hidden">
+//         <h2 className="text-center text-2xl font-black uppercase tracking-[0.2em] mb-16 opacity-30 italic">Real People. Real Results.</h2>
+//         <div className="flex gap-8 overflow-hidden animate-marquee">
+//             {[1,2,3,4,5].map(i => (
+//                 <div key={i} className="min-w-[350px] bg-gray-50 p-10 rounded-[3rem] border border-gray-100 italic">
+//                     <p className="text-sm text-gray-500 mb-6">"Maine pehle liquid detergents use kiye the, lekin LUKA PODS ne stain removal ka level hi badal diya. It's so mess-free!"</p>
+//                     <div className="flex items-center gap-4">
+//                         <div className="w-12 h-12 bg-blue-100 rounded-full"></div>
+//                         <div><h5 className="font-black text-xs uppercase">Anjali Sharma</h5><p className="text-[10px] text-gray-400">Verified Buyer</p></div>
+//                     </div>
+//                 </div>
+//             ))}
+//         </div>
+//       </section>
+
+//       {/* 10. FAQ SECTION */}
+//       {/* <section className="w-full bg-[#fcfcfc] py-24 px-4 border-t border-gray-100">
+//         <div className="max-w-4xl mx-auto">
+//           <div className="text-center mb-16">
+//             <h2 className="text-4xl font-black text-[#1e3a5f] mb-4 uppercase italic">Support Center</h2>
+//             <p className="text-gray-400 text-sm tracking-widest font-bold">Everything you need to know about LUKA PODS.</p>
+//           </div>
+
+//           <div className="space-y-6">
+//             {faqData.map((faq, index) => (
+//               <div key={index} className={`border border-gray-100 rounded-3xl transition-all duration-300 ${activeFaq === index ? 'bg-white shadow-xl ring-1 ring-blue-100' : 'bg-gray-50'}`}>
+//                 <button
+//                   onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+//                   className="w-full flex justify-between items-center p-8 text-left group"
+//                 >
+//                   <span className="text-[#1e3a5f] font-black uppercase text-xs tracking-widest">{faq.question}</span>
+//                   <span className={`text-2xl text-blue-500 font-light transition-transform ${activeFaq === index ? 'rotate-45' : ''}`}>+</span>
+//                 </button>
+//                 {activeFaq === index && (
+//                   <div className="px-8 pb-8 text-gray-500 text-sm leading-relaxed border-l-4 border-[#4b70e2] ml-8 mb-4">
+//                     {faq.answer}
+//                   </div>
+//                 )}
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//       </section> */}
+
+// <section className="w-full bg-[#fcfcfc] py-24 px-4 border-t border-gray-100">
+//   <div className="max-w-4xl mx-auto">
+//     {/* Header Section */}
+//     <div className="text-center mb-16">
+//       <h2 className="text-4xl font-black text-[#1e3a5f] mb-4 uppercase italic">Support Center</h2>
+//       <p className="text-gray-400 text-sm tracking-widest font-bold">Everything you need to know about LUKA PODS.</p>
+//     </div>
+
+//     {/* Direct Q&A List */}
+//     <div className="space-y-8">
+//       {faqData.map((faq, index) => (
+//         <div 
+//           key={index} 
+//           className="bg-white border border-gray-100 rounded-[32px] p-8 md:p-10 shadow-sm transition-all duration-300 hover:shadow-md"
+//         >
+//           {/* Question: Always Visible */}
+//           <div className="mb-5 flex items-start">
+//             <span className="text-blue-500 font-black mr-3 text-sm">Q.</span>
+//             <h3 className="text-[#1e3a5f] font-black uppercase text-xs tracking-widest leading-tight">
+//               {faq.question}
+//             </h3>
+//           </div>
+
+//           {/* Answer: Always Visible */}
+//           <div className="text-gray-500 text-sm leading-relaxed border-l-2 border-[#4b70e2]/30 pl-6 ml-2">
+//             <span className="text-gray-400 font-bold mr-2">A:</span>
+//             {faq.answer}
+//           </div>
+//         </div>
+//       ))}
+//     </div>
+//   </div>
+// </section>
+
+//       <Footer />
+//     </div>
+//   );
+// };
+
+// export default Home;
+
+import React, { useState, useEffect } from 'react';
 import Header from '../../components/header';
 import Product from "../products/index"
 import Footer from "../../components/Footer"
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion'; // Naya import animation ke liye
+
 const Home = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [activeFaq, setActiveFaq] = useState(null);
   const navigate = useNavigate();
-  // const baseURL = "https://api.lukapods.graphicsvolume.com";
-  const baseURL = window.location.hostname === "localhost"
-  ? "http://localhost:4170"                    // Jab aap PC par kaam kar rahe ho
-  : "https://api.lukapods.graphicsvolume.com";
-
-  // const products = [
-  //   { id: 1, name: "Laundry Detergent Pods - All-in-1 Stain Removal", price: "1,899.00", oldPrice: "4,200.00", discount: "54%", rating: "4.75", reviews: "801", image: "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?auto=format&fit=crop&q=80&w=800" },
-  //   { id: 2, name: "Floor Cleaner Refill - Pet & Kid Safe Formula", price: "249.00", oldPrice: "500.00", discount: "50%", rating: "4.8", reviews: "450", image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800" },
-  //   { id: 3, name: "Dishwash Power Pods - Tough Grease Remover", price: "349.00", oldPrice: "750.00", discount: "53%", rating: "4.9", reviews: "320", image: "https://thumbs.dreamstime.com/b/easy-to-edit-vector-illustration-advertisement-banner-stain-dirt-remover-powder-laundry-detergent-clean-fresh-118043412.jpg" },
-  //   { id: 4, name: "Multi-Surface Spray - Organic Shine", price: "199.00", oldPrice: "400.00", discount: "50%", rating: "4.6", reviews: "210", image: "https://images.unsplash.com/photo-1528740561666-dc2479dc08ab?auto=format&fit=crop&q=80&w=800" },
-  // ];
   
+  const baseURL = window.location.hostname === "localhost"
+    ? "http://localhost:4170"
+    : "https://api.lukapods.graphicsvolume.com";
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
- useEffect(() => {
-  const fetchProducts = async () => {
-    try {
-      setLoading(true);
-      // Sahi API path: /api/user/product/all (Jo aapne backend routes mein set kiya tha)
-      const response = await axios.get(`${baseURL}/api/user/product/all`);
-      
-      // Backend response check: response.data.status aur response.data.products
-      if (response.data && response.data.products) {
-        // Hum sirf pehle 4 products dikhana chahte hain
-        console.log("Full First Product Object:", response.data.products[0]);
-        setProducts(response.data.products.slice(0, 4)); 
-      }
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    } finally {
-      setLoading(false);
-    }
+
+  // Animation Variants
+  const fadeInUp = {
+    initial: { opacity: 0, y: 60 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.6, ease: "easeOut" }
   };
 
-  fetchProducts();
-}, []);
+  const staggerContainer = {
+    initial: {},
+    whileInView: { transition: { staggerChildren: 0.2 } }
+  };
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(`${baseURL}/api/user/product/all`);
+        if (response.data && response.data.products) {
+          setProducts(response.data.products.slice(0, 4)); 
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
+
   const faqData = [
     { question: "Will LUKA PODS work with my specific washing machine type?", answer: "Absolutely! LUKA PODS are engineered for versatility. They are 100% compatible with both Top-load and Front-load fully automatic machines." },
     { question: "Do I need hot water to dissolve these pods?", answer: "Not at all. Our advanced fast-dissolving film technology melts away completely in any water temperature." },
@@ -390,344 +807,235 @@ const Home = () => {
 
   return (
     <div className="min-h-screen w-full bg-white m-0 p-0 overflow-x-hidden">
-      {/* 1. Announcement Bar */}
-
-
       <Header />
 
-      {/* 3. HERO BANNER */}
+      {/* 3. HERO BANNER with Fade-in Animation */}
       <section className="relative w-full h-[500px] md:h-[700px] bg-gray-200 overflow-hidden">
-        <img 
+        <motion.img 
+          initial={{ scale: 1.2, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1.5 }}
           src="https://img.freepik.com/free-photo/indoor-shot-happy-european-lady-with-overjoyed-expression-keeps-mouth-opened-crosses-hand-indicates-two-sides-detergents_273609-24908.jpg?semt=ais_user_personalization&w=740&q=80" 
           alt="Lukapods Banner" 
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex flex-col items-center justify-end pb-20">
-          <h1 className="text-white text-4xl md:text-6xl font-black mb-8 tracking-tighter text-center px-4 uppercase italic">
+          <motion.h1 
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="text-white text-4xl md:text-6xl font-black mb-8 tracking-tighter text-center px-4 uppercase italic"
+          >
             Revolutionizing Your <br/> Home Laundry
-          </h1>
-       <button 
-  onClick={() => navigate('/shop')} // Yahan apne product list ka route dalein (e.g., /products ya /shop)
-  className="bg-white text-[#1e3a5f] px-12 py-4 rounded-full font-black text-xs md:text-sm uppercase tracking-[0.3em] shadow-2xl hover:bg-[#1e3a5f] hover:text-white transition-all transform hover:scale-110"
->
-  Explore Collections
-</button>
+          </motion.h1>
+          <motion.button 
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => navigate('/shop')}
+            className="bg-white text-[#1e3a5f] px-12 py-4 rounded-full font-black text-xs md:text-sm uppercase tracking-[0.3em] shadow-2xl hover:bg-[#1e3a5f] hover:text-white transition-all shadow-white/20"
+          >
+            Explore Collections
+          </motion.button>
         </div>
       </section>
 
-      {/* 4. Impact Stats Bar (NEW) */}
-      <section className="w-full bg-[#1e3a5f] py-10 text-white">
+      {/* 4. Impact Stats Bar (Reveal Animation) */}
+      <motion.section 
+        initial="initial"
+        whileInView="whileInView"
+        variants={staggerContainer}
+        viewport={{ once: true }}
+        className="w-full bg-[#1e3a5f] py-10 text-white"
+      >
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div><p className="text-3xl font-black italic">5000+</p><p className="text-[10px] uppercase tracking-widest font-bold opacity-70">Plastic Bottles Saved</p></div>
-            <div><p className="text-3xl font-black italic">10K+</p><p className="text-[10px] uppercase tracking-widest font-bold opacity-70">Happy Households</p></div>
-            <div><p className="text-3xl font-black italic">100%</p><p className="text-[10px] uppercase tracking-widest font-bold opacity-70">Biodegradable Formula</p></div>
-            <div><p className="text-3xl font-black italic">No</p><p className="text-[10px] uppercase tracking-widest font-bold opacity-70">Harmful Residues</p></div>
+            {[
+              { val: "5000+", label: "Plastic Bottles Saved" },
+              { val: "10K+", label: "Happy Households" },
+              { val: "100%", label: "Biodegradable Formula" },
+              { val: "No", label: "Harmful Residues" }
+            ].map((stat, i) => (
+              <motion.div key={i} variants={fadeInUp}>
+                <p className="text-3xl font-black italic">{stat.val}</p>
+                <p className="text-[10px] uppercase tracking-widest font-bold opacity-70">{stat.label}</p>
+              </motion.div>
+            ))}
         </div>
-      </section>
+      </motion.section>
 
-      {/* 5. Why Switch Section */}
+      {/* 5. Why Switch Section (Horizontal Stagger) */}
       <section className="w-full bg-white py-24">
         <div className="max-w-[1400px] mx-auto px-4 text-center">
-          <h2 className="text-[#1e3a5f] text-3xl md:text-5xl font-black mb-16 tracking-tighter uppercase italic">
+          <motion.h2 {...fadeInUp} className="text-[#1e3a5f] text-3xl md:text-5xl font-black mb-16 tracking-tighter uppercase italic">
              Why LUKA is Smarter Than Liquid
-          </h2>
-          <div className="flex overflow-x-auto gap-8 pb-10 no-scrollbar snap-x px-4">
+          </motion.h2>
+          <motion.div 
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true }}
+            className="flex overflow-x-auto gap-8 pb-10 no-scrollbar snap-x px-4"
+          >
             {switchReasons.map((item) => (
-              <div key={item.id} className="min-w-[280px] lg:flex-1 snap-start group">
+              <motion.div variants={fadeInUp} key={item.id} className="min-w-[280px] lg:flex-1 snap-start group">
                 <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border border-gray-100 mb-6">
                   <img src={item.img} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 </div>
                 <h4 className="text-xs font-black text-[#1e3a5f] uppercase tracking-widest px-4">{item.title}</h4>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* --- 6. THE PROCESS: DROP, LOAD, WASH (NEW) --- */}
+      {/* 6. THE PROCESS (Step-by-Step Animation) */}
       <section className="w-full bg-[#f8faff] py-24 px-4">
           <div className="max-w-6xl mx-auto">
-             <h2 className="text-center text-3xl font-black text-[#1e3a5f] mb-16 uppercase italic">Simple. Effective. Effortless.</h2>
-             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-                {/* Visual Connector Line for Desktop */}
+             <motion.h2 {...fadeInUp} className="text-center text-3xl font-black text-[#1e3a5f] mb-16 uppercase italic">Simple. Effective. Effortless.</motion.h2>
+             <motion.div 
+               variants={staggerContainer}
+               initial="initial"
+               whileInView="whileInView"
+               viewport={{ once: true }}
+               className="grid grid-cols-1 md:grid-cols-3 gap-12 relative"
+             >
                 <div className="hidden md:block absolute top-12 left-20 right-20 h-0.5 bg-blue-200 dashed"></div>
                 
-                <div className="text-center relative z-10">
-                    <div className="w-24 h-24 bg-[#4b70e2] text-white rounded-full mx-auto flex items-center justify-center text-3xl font-black shadow-xl mb-6 ring-8 ring-white">01</div>
-                    <h4 className="font-black uppercase text-sm mb-2">Drop</h4>
-                    <p className="text-xs text-gray-400 px-6">Place one pod in the back of the empty drum.</p>
-                </div>
-                <div className="text-center relative z-10">
-                    <div className="w-24 h-24 bg-[#4b70e2] text-white rounded-full mx-auto flex items-center justify-center text-3xl font-black shadow-xl mb-6 ring-8 ring-white">02</div>
-                    <h4 className="font-black uppercase text-sm mb-2">Load</h4>
-                    <p className="text-xs text-gray-400 px-6">Add your laundry on top of the LUKA pod.</p>
-                </div>
-                <div className="text-center relative z-10">
-                    <div className="w-24 h-24 bg-[#4b70e2] text-white rounded-full mx-auto flex items-center justify-center text-3xl font-black shadow-xl mb-6 ring-8 ring-white">03</div>
-                    <h4 className="font-black uppercase text-sm mb-2">Wash</h4>
-                    <p className="text-xs text-gray-400 px-6">Start any cycle. It dissolves instantly!</p>
-                </div>
-             </div>
+                {[
+                  { n: "01", t: "Drop", d: "Place one pod in the back of the empty drum." },
+                  { n: "02", t: "Load", d: "Add your laundry on top of the LUKA pod." },
+                  { n: "03", t: "Wash", d: "Start any cycle. It dissolves instantly!" }
+                ].map((step, i) => (
+                  <motion.div key={i} variants={fadeInUp} className="text-center relative z-10">
+                      <div className="w-24 h-24 bg-[#4b70e2] text-white rounded-full mx-auto flex items-center justify-center text-3xl font-black shadow-xl mb-6 ring-8 ring-white transition-transform group-hover:scale-110">{step.n}</div>
+                      <h4 className="font-black uppercase text-sm mb-2">{step.t}</h4>
+                      <p className="text-xs text-gray-400 px-6">{step.d}</p>
+                  </motion.div>
+                ))}
+             </motion.div>
           </div>
       </section>
 
-      {/* 7. Product Grid */}
-      {/* <section className="max-w-7xl mx-auto px-4 py-24 bg-white">
-        <div className="flex flex-col items-center mb-16 text-center">
-            <h2 className="text-4xl md:text-5xl font-black text-[#1e3a5f] uppercase tracking-tighter italic">Featured Collection</h2>
-            <div className="w-24 h-2 bg-[#4b70e2] mt-4 rounded-full"></div>
-        </div>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
-            {products.map((product) => (
-              <div 
-                key={product.id}
-                onClick={() => setSelectedProduct(product)}
-                className="bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer group border border-gray-100 flex flex-col"
-              >
-                <div className="h-96 overflow-hidden bg-[#f9f9f9] p-8">
-                  <img src={product.image} alt={product.name} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 mix-blend-multiply" />
-                </div>
-                <div className="p-10 text-center flex-grow flex flex-col justify-between">
-                  <h3 className="text-[12px] font-black text-[#1e3a5f] mb-4 uppercase tracking-tighter">{product.name}</h3>
-                  <div className="mb-6"><span className="text-gray-300 line-through text-xs font-bold mr-3">Rs. {product.oldPrice}</span><span className="text-[#d91e18] text-2xl font-black italic tracking-tighter">Rs. {product.price}</span></div>
-                  <button className="bg-[#1e3a5f] text-white w-full py-4 rounded-full font-black hover:bg-[#4b70e2] transition-all uppercase text-[10px] tracking-widest shadow-lg">Buy Now</button>
-                </div>
-              </div>
-            ))}
-        </div>
-      </section> */}
-    
-      {/* <section className="max-w-7xl mx-auto px-4 py-24 bg-white">
-  <div className="flex flex-col items-center mb-16 text-center">
-      <h2 className="text-4xl md:text-5xl font-black text-[#1e3a5f] uppercase tracking-tighter italic">Featured Collection</h2>
-      <div className="w-24 h-2 bg-[#4b70e2] mt-4 rounded-full"></div>
-  </div>
-  
-  {loading ? (
-    <div className="text-center font-black py-20">Loading Lukapods...</div>
-  ) : (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
-        {products.map((product) => {
-          // Image logic: Agar image full URL nahi hai toh baseURL jodein
-          const imageUrl = product.product_images && product.product_images[0] 
-            ? product.product_images[0].startsWith('http') 
-              ? product.product_images[0] 
-              : `${baseURL}/${product.product_images[0]}`
-            : 'https://via.placeholder.com/300'; // Fallback image
-
-          return (
-            <div 
-              key={product._id} 
-              onClick={() => setSelectedProduct(product)}
-              className="bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer group border border-gray-100 flex flex-col"
-            >
-              <div className="h-96 overflow-hidden bg-[#f9f9f9] p-8 flex items-center justify-center">
-                <img 
-                  src={imageUrl} 
-                  alt={product.name} 
-                  className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-700 mix-blend-multiply" 
-                />
-              </div>
-              <div className="p-10 text-center flex-grow flex flex-col justify-between">
-                <div>
-                  <h3 className="text-[12px] font-black text-[#1e3a5f] mb-4 uppercase tracking-tighter line-clamp-2">
-                    {product.name}
-                  </h3>
-                  <div className="mb-6">
-                    <span className="text-[#d91e18] text-2xl font-black italic tracking-tighter">
-                      Rs. {product.price}
-                    </span>
-                  </div>
-                </div>
-                <button className="bg-[#1e3a5f] text-white w-full py-4 rounded-full font-black hover:bg-[#4b70e2] transition-all uppercase text-[10px] tracking-widest shadow-lg">
-                  Buy Now
-                </button>
-              </div>
-            </div>
-          );
-        })}
-    </div>
-  )}
-</section> */}
-<section className="max-w-7xl mx-auto px-4 py-24 bg-white">
-        <div className="flex flex-col items-center mb-16 text-center">
-          <h2 className="text-4xl md:text-5xl font-black text-[#1e3a5f] uppercase tracking-tighter italic">
-            Featured Collection
-          </h2>
+      {/* 7. Product Grid (Professional Reveal) */}
+      <section className="max-w-7xl mx-auto px-4 py-24 bg-white">
+        <motion.div {...fadeInUp} className="flex flex-col items-center mb-16 text-center">
+          <h2 className="text-4xl md:text-5xl font-black text-[#1e3a5f] uppercase tracking-tighter italic">Featured Collection</h2>
           <div className="w-24 h-2 bg-[#4b70e2] mt-4 rounded-full"></div>
-        </div>
+        </motion.div>
 
         {loading ? (
-          <div className="text-center font-black py-20 text-[#1e3a5f] animate-pulse">
-            Loading Lukapods...
-          </div>
+          <div className="text-center font-black py-20 text-[#1e3a5f] animate-pulse">Loading Lukapods...</div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+          <motion.div 
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12"
+          >
             {products.map((product) => {
-              // 1. Image logic
               const imageUrl = product.product_images && product.product_images[0]
-                ? product.product_images[0].startsWith('http')
-                  ? product.product_images[0]
-                  : `${baseURL}/${product.product_images[0]}`
+                ? product.product_images[0].startsWith('http') ? product.product_images[0] : `${baseURL}/${product.product_images[0]}`
                 : 'https://via.placeholder.com/300';
-
-              // 2. Variable Mapping according to your Schema
               const pName = product.product_name || "Luka Cleaning Pod";
-              const pDesc = product.product_description 
-  ? product.product_description.replace(/<[^>]*>/g, '') 
-  : "Eco-friendly cleaning solution.";
               const pPrice = product.price || 0;
-              // Synthetic old price (25% extra) for visual discount
-              const pOldPrice = Math.round(pPrice * 1.25);
 
               return (
-                <div
+                <motion.div
+                  variants={fadeInUp}
+                  whileHover={{ y: -10 }}
                   key={product._id}
                   onClick={() => setSelectedProduct(product)}
                   className="bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer group border border-gray-100 flex flex-col relative"
                 >
-                  {/* Discount Badge */}
-                  <div className="absolute top-6 left-6 z-10 bg-[#d91e18] text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-lg">
-                    20% OFF
-                  </div>
-
-                  {/* Product Image */}
+                  <div className="absolute top-6 left-6 z-10 bg-[#d91e18] text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-lg">20% OFF</div>
                   <div className="h-80 overflow-hidden bg-[#f9f9f9] p-8 flex items-center justify-center">
-                    <img
-                      src={imageUrl}
-                      alt={pName}
-                      className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-700 mix-blend-multiply"
-                    />
+                    <img src={imageUrl} alt={pName} className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-700 mix-blend-multiply" />
                   </div>
-
-                  {/* Product Details */}
                   <div className="p-8 text-center flex-grow flex flex-col justify-between">
                     <div>
-                      <h3 className="text-[13px] font-black text-[#1e3a5f] mb-2 uppercase tracking-tighter line-clamp-1">
-                        {pName}
-                      </h3>
-                      <p className="text-[10px] text-gray-400 mb-4 line-clamp-2 leading-relaxed px-2">
-                        {pDesc}
-                      </p>
-
-                      <div className="mb-6 flex flex-col items-center justify-center">
-                        <span className="text-gray-300 line-through text-[11px] font-bold">
-                          Rs. {pOldPrice}
-                        </span>
-                        <span className="text-[#d91e18] text-2xl font-black italic tracking-tighter">
-                          Rs. {pPrice}
-                        </span>
+                      <h3 className="text-[13px] font-black text-[#1e3a5f] mb-2 uppercase tracking-tighter line-clamp-1">{pName}</h3>
+                      <div className="mb-6 flex flex-col items-center">
+                        <span className="text-gray-300 line-through text-[11px] font-bold">Rs. {Math.round(pPrice * 1.25)}</span>
+                        <span className="text-[#d91e18] text-2xl font-black italic tracking-tighter">Rs. {pPrice}</span>
                       </div>
                     </div>
-
-                    <button className="bg-[#1e3a5f] text-white w-full py-4 rounded-full font-black hover:bg-[#4b70e2] transition-all uppercase text-[10px] tracking-widest shadow-lg transform active:scale-95">
-                    View Product
-                    </button>
+                    <button className="bg-[#1e3a5f] text-white w-full py-4 rounded-full font-black hover:bg-[#4b70e2] transition-all uppercase text-[10px] tracking-widest shadow-lg">View Product</button>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         )}
       </section>
 
-      {/* --- 8. INGREDIENT HIGHLIGHT (NEW) --- */}
-      <section className="w-full bg-[#1e3a5f] py-24 text-white">
+      {/* 8. Ingredient Highlight (Slide from Left/Right) */}
+      <section className="w-full bg-[#1e3a5f] py-24 text-white overflow-hidden">
          <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div>
+            <motion.div 
+              initial={{ x: -100, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
                <h2 className="text-4xl font-black uppercase italic mb-8">What's Inside LUKA?</h2>
                <p className="text-white/70 mb-10 text-sm leading-relaxed">No secret toxins. No hidden chemicals. Just pure cleaning power derived from nature's strongest enzymes.</p>
                <div className="space-y-6">
                   {["Natural Bio-Enzymes for Stain Extraction", "Plant-based Surfactants for Gentle Wash", "Biodegradable Fast-Dissolving Film", "Skin-Safe Organic Fragrance"].map((text, i) => (
-                    <div key={i} className="flex items-center gap-4"><span className="text-[#4b70e2] text-xl">✔</span> <span className="font-bold text-xs uppercase tracking-widest">{text}</span></div>
+                    <motion.div 
+                      key={i} 
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                      className="flex items-center gap-4"
+                    >
+                      <span className="text-[#4b70e2] text-xl">✔</span> 
+                      <span className="font-bold text-xs uppercase tracking-widest">{text}</span>
+                    </motion.div>
                   ))}
                </div>
-            </div>
-            <div className="bg-white/10 p-1 rounded-[4rem] backdrop-blur-sm">
+            </motion.div>
+            <motion.div 
+              initial={{ x: 100, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="bg-white/10 p-1 rounded-[4rem] backdrop-blur-sm"
+            >
                 <img src="https://images.unsplash.com/photo-1559131397-f94da358f7ca?q=80&w=800" className="w-full h-full rounded-[4rem] object-cover opacity-90 shadow-2xl" alt="Inside Luka" />
-            </div>
+            </motion.div>
          </div>
       </section>
 
-      {/* --- 9. CUSTOMER TESTIMONIALS (NEW) --- */}
-      <section className="w-full bg-white py-24 px-4 overflow-hidden">
-        <h2 className="text-center text-2xl font-black uppercase tracking-[0.2em] mb-16 opacity-30 italic">Real People. Real Results.</h2>
-        <div className="flex gap-8 overflow-hidden animate-marquee">
-            {[1,2,3,4,5].map(i => (
-                <div key={i} className="min-w-[350px] bg-gray-50 p-10 rounded-[3rem] border border-gray-100 italic">
-                    <p className="text-sm text-gray-500 mb-6">"Maine pehle liquid detergents use kiye the, lekin LUKA PODS ne stain removal ka level hi badal diya. It's so mess-free!"</p>
-                    <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-blue-100 rounded-full"></div>
-                        <div><h5 className="font-black text-xs uppercase">Anjali Sharma</h5><p className="text-[10px] text-gray-400">Verified Buyer</p></div>
-                    </div>
-                </div>
-            ))}
-        </div>
-      </section>
-
-      {/* 10. FAQ SECTION */}
-      {/* <section className="w-full bg-[#fcfcfc] py-24 px-4 border-t border-gray-100">
+      {/* 10. FAQ (Simple Reveal) */}
+      <section className="w-full bg-[#fcfcfc] py-24 px-4 border-t border-gray-100">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
+          <motion.div {...fadeInUp} className="text-center mb-16">
             <h2 className="text-4xl font-black text-[#1e3a5f] mb-4 uppercase italic">Support Center</h2>
             <p className="text-gray-400 text-sm tracking-widest font-bold">Everything you need to know about LUKA PODS.</p>
-          </div>
+          </motion.div>
 
-          <div className="space-y-6">
+          <div className="space-y-8">
             {faqData.map((faq, index) => (
-              <div key={index} className={`border border-gray-100 rounded-3xl transition-all duration-300 ${activeFaq === index ? 'bg-white shadow-xl ring-1 ring-blue-100' : 'bg-gray-50'}`}>
-                <button
-                  onClick={() => setActiveFaq(activeFaq === index ? null : index)}
-                  className="w-full flex justify-between items-center p-8 text-left group"
-                >
-                  <span className="text-[#1e3a5f] font-black uppercase text-xs tracking-widest">{faq.question}</span>
-                  <span className={`text-2xl text-blue-500 font-light transition-transform ${activeFaq === index ? 'rotate-45' : ''}`}>+</span>
-                </button>
-                {activeFaq === index && (
-                  <div className="px-8 pb-8 text-gray-500 text-sm leading-relaxed border-l-4 border-[#4b70e2] ml-8 mb-4">
-                    {faq.answer}
-                  </div>
-                )}
-              </div>
+              <motion.div 
+                {...fadeInUp}
+                key={index} 
+                className="bg-white border border-gray-100 rounded-[32px] p-8 md:p-10 shadow-sm hover:shadow-md transition-all"
+              >
+                <div className="mb-5 flex items-start">
+                  <span className="text-blue-500 font-black mr-3 text-sm">Q.</span>
+                  <h3 className="text-[#1e3a5f] font-black uppercase text-xs tracking-widest leading-tight">{faq.question}</h3>
+                </div>
+                <div className="text-gray-500 text-sm leading-relaxed border-l-2 border-[#4b70e2]/30 pl-6 ml-2">
+                  <span className="text-gray-400 font-bold mr-2">A:</span>{faq.answer}
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section> */}
-
-<section className="w-full bg-[#fcfcfc] py-24 px-4 border-t border-gray-100">
-  <div className="max-w-4xl mx-auto">
-    {/* Header Section */}
-    <div className="text-center mb-16">
-      <h2 className="text-4xl font-black text-[#1e3a5f] mb-4 uppercase italic">Support Center</h2>
-      <p className="text-gray-400 text-sm tracking-widest font-bold">Everything you need to know about LUKA PODS.</p>
-    </div>
-
-    {/* Direct Q&A List */}
-    <div className="space-y-8">
-      {faqData.map((faq, index) => (
-        <div 
-          key={index} 
-          className="bg-white border border-gray-100 rounded-[32px] p-8 md:p-10 shadow-sm transition-all duration-300 hover:shadow-md"
-        >
-          {/* Question: Always Visible */}
-          <div className="mb-5 flex items-start">
-            <span className="text-blue-500 font-black mr-3 text-sm">Q.</span>
-            <h3 className="text-[#1e3a5f] font-black uppercase text-xs tracking-widest leading-tight">
-              {faq.question}
-            </h3>
-          </div>
-
-          {/* Answer: Always Visible */}
-          <div className="text-gray-500 text-sm leading-relaxed border-l-2 border-[#4b70e2]/30 pl-6 ml-2">
-            <span className="text-gray-400 font-bold mr-2">A:</span>
-            {faq.answer}
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
+      </section>
 
       <Footer />
     </div>
