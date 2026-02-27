@@ -49,11 +49,7 @@ const ProductListing = () => {
       <Toaster />
       
       {/* 1. Announcement Bar (Exactly like Home) */}
-      <div className="w-full bg-[#4b70e2] text-white py-2 px-10 text-center text-[11px] font-black tracking-[0.3em] uppercase flex justify-between items-center shadow-md">
-        <span className="hidden sm:block">❮</span>
-        <span className="flex-1">✨ 100% Plastic-Free Cleaning Solution ✨</span>
-        <span className="hidden sm:block">❯</span>
-      </div>
+
 
       <Header />
 
@@ -203,7 +199,7 @@ const ProductCard = ({ product, baseURL }) => {
           </div>
         </div>
 
-        <button className="bg-[#1e3a5f] text-white w-full py-4 rounded-full font-black hover:bg-[#4b70e2] transition-all uppercase text-[10px] tracking-[0.2em] shadow-lg transform active:scale-95">
+        <button  onClick={() => navigate('/checkout')} className="bg-[#1e3a5f] text-white w-full py-4 rounded-full font-black hover:bg-[#4b70e2] transition-all uppercase text-[10px] tracking-[0.2em] shadow-lg transform active:scale-95">
           Buy Now
         </button>
       </div>

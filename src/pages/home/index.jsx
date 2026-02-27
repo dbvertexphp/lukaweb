@@ -667,7 +667,7 @@ const Home = () => {
       </section>
 
       {/* 10. FAQ SECTION */}
-      <section className="w-full bg-[#fcfcfc] py-24 px-4 border-t border-gray-100">
+      {/* <section className="w-full bg-[#fcfcfc] py-24 px-4 border-t border-gray-100">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-black text-[#1e3a5f] mb-4 uppercase italic">Support Center</h2>
@@ -693,7 +693,41 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
+
+<section className="w-full bg-[#fcfcfc] py-24 px-4 border-t border-gray-100">
+  <div className="max-w-4xl mx-auto">
+    {/* Header Section */}
+    <div className="text-center mb-16">
+      <h2 className="text-4xl font-black text-[#1e3a5f] mb-4 uppercase italic">Support Center</h2>
+      <p className="text-gray-400 text-sm tracking-widest font-bold">Everything you need to know about LUKA PODS.</p>
+    </div>
+
+    {/* Direct Q&A List */}
+    <div className="space-y-8">
+      {faqData.map((faq, index) => (
+        <div 
+          key={index} 
+          className="bg-white border border-gray-100 rounded-[32px] p-8 md:p-10 shadow-sm transition-all duration-300 hover:shadow-md"
+        >
+          {/* Question: Always Visible */}
+          <div className="mb-5 flex items-start">
+            <span className="text-blue-500 font-black mr-3 text-sm">Q.</span>
+            <h3 className="text-[#1e3a5f] font-black uppercase text-xs tracking-widest leading-tight">
+              {faq.question}
+            </h3>
+          </div>
+
+          {/* Answer: Always Visible */}
+          <div className="text-gray-500 text-sm leading-relaxed border-l-2 border-[#4b70e2]/30 pl-6 ml-2">
+            <span className="text-gray-400 font-bold mr-2">A:</span>
+            {faq.answer}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 
       <Footer />
     </div>
