@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../../components/Header'; // Header import kiya gaya hai
+import Header from "../../components/header"; // Header import kiya gaya hai
 import Footer from '../../components/Footer';
 
 const AboutUs = () => {
