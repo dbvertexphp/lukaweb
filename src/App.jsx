@@ -25,10 +25,16 @@ import OrderHistory from './pages/orderhistery';
 import ProductListing from './pages/Productlist';
 
 import Product from './pages/products'; 
+import ProfilePage from './pages/ProfilePage';
+import LoginModal from './components/LoginModal';
+import ScrollToTop from './components/ScrollToTop';
+import AboutUs from './pages/About/AboutUs';
 
 function App() {
   return (
     <Router>
+       <ScrollToTop /> 
+        <LoginModal /> 
       <Routes>
         {/* Main Home Page */}
         <Route path="/" element={<Home />} />
@@ -41,6 +47,8 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/orders" element={<OrderHistory />} />
         <Route path="/shop" element={<ProductListing />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/aboutUs" element={<AboutUs />} />
       </Routes>
     </Router>
   );

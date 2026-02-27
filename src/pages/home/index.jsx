@@ -333,7 +333,10 @@ const Home = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [activeFaq, setActiveFaq] = useState(null);
   const navigate = useNavigate();
-  const baseURL = "https://api.lukapods.graphicsvolume.com";
+  // const baseURL = "https://api.lukapods.graphicsvolume.com";
+  const baseURL = window.location.hostname === "localhost"
+  ? "http://localhost:4170"                    // Jab aap PC par kaam kar rahe ho
+  : "https://api.lukapods.graphicsvolume.com";
 
   // const products = [
   //   { id: 1, name: "Laundry Detergent Pods - All-in-1 Stain Removal", price: "1,899.00", oldPrice: "4,200.00", discount: "54%", rating: "4.75", reviews: "801", image: "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?auto=format&fit=crop&q=80&w=800" },
@@ -388,11 +391,7 @@ const Home = () => {
   return (
     <div className="min-h-screen w-full bg-white m-0 p-0 overflow-x-hidden">
       {/* 1. Announcement Bar */}
-      <div className="w-full bg-[#4b70e2] text-white py-2 px-10 text-center text-[11px] font-black tracking-[0.3em] uppercase flex justify-between items-center shadow-md">
-        <span className="cursor-pointer hidden sm:block">❮</span>
-        <span className="flex-1">✨ 100% Plastic-Free Cleaning Solution ✨</span>
-        <span className="cursor-pointer hidden sm:block">❯</span>
-      </div>
+
 
       <Header />
 

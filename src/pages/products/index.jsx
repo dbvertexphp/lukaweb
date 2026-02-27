@@ -521,8 +521,13 @@ import Header from '../../components/header';
 import Footer from "../../components/Footer";
 import { toast, Toaster } from 'react-hot-toast'; 
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 const Product = ({ product, onBack }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Page load hote hi top par le jayega
+}, []);
+  const { user, setIsLoginModalOpen } = useAuth();
   const baseURL = "https://api.lukapods.graphicsvolume.com";
   const navigate = useNavigate()
   // 1. Backend Data Mapping
@@ -592,27 +597,41 @@ const Product = ({ product, onBack }) => {
   };
 
   const toggleTab = (tab) => setActiveTab(activeTab === tab ? null : tab);
-const handleBuyNow = async () => {
-  try {
-    // 1. Pehle item ko Cart mein save karo (taaki backend ya local storage ko pata chale)
-    await handleAddToCart(); 
+// const handleBuyNow = async () => {
+
+//   try {
+//     // 1. Pehle item ko Cart mein save karo (taaki backend ya local storage ko pata chale)
+//     await handleAddToCart(); 
     
-    // 2. Ab user ko direct "Checkout" page par bhejo, na ki "Cart" page par
-    // Taki user wahan Address fill kar sake
-    navigate('/checkout'); 
+//     // 2. Ab user ko direct "Checkout" page par bhejo, na ki "Cart" page par
+//     // Taki user wahan Address fill kar sake
+//     navigate('/checkout'); 
     
-  } catch (error) {
-    console.error("Buy Now failed:", error);
-    toast.error("Process fail ho gaya!");
-  }
-};
+//   } catch (error) {
+//     console.error("Buy Now failed:", error);
+//     toast.error("Process fail ho gaya!");
+//   }
+// };
+
+ const handleBuyNow = () => {
+  
+    console.log("Buy Now Clicked, User Status:", user); // Debugging ke liye
+    
+    if (!user) {
+      console.log("User not found, opening modal...");
+      setIsLoginModalOpen(true); // 👈 Yeh modal open karega
+    } else {
+      // Agar login hai toh checkout par bhej do
+      const cartItem = { id: product._id, name: pName, price: pPrice /* ... */ };
+      localStorage.setItem('cart', JSON.stringify([cartItem]));
+      navigate('/checkout');
+    }
+  };
   return (
     <div className="min-h-screen bg-white font-sans text-[#1e3a5f]">
       <Toaster position="top-center" reverseOrder={false} />
       
-      <div className="w-full bg-[#4b70e2] text-white py-2 text-center text-[10px] md:text-[12px] font-bold tracking-[0.2em] uppercase">
-        ✨ 10,000+ Happy Households Across India ✨
-      </div>
+
       
       <Header />
 
