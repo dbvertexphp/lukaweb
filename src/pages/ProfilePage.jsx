@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { User, MapPin, Phone, Mail, Camera, Save, Package, Edit2, X, ChevronLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import Header from '../components/header';
 
 const ProfilePage = () => {
     const navigate = useNavigate();
@@ -118,6 +119,7 @@ const ProfilePage = () => {
 
     return (
         <div className="min-h-screen bg-gray-50 pb-20 font-sans">
+            <Header />
             {/* Banner Section */}
             <div className="h-48 md:h-56 bg-[#1e3a5f] relative">
                 <div className="max-w-6xl mx-auto px-4 pt-6">

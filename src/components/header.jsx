@@ -291,7 +291,7 @@ const Header = () => {
             </button> */}
 
             <button
-              onClick={handleCartClick} // 👈 Naya function yahan lagayein
+              onClick={handleCartClick} 
               className="relative text-[#1e3a5f] hover:text-blue-500 transition-colors"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 md:w-7 md:h-7">
@@ -304,15 +304,15 @@ const Header = () => {
               )}
             </button>
 
-            {/* Orders Link */}
+            
             {user && (
               <Link to="/orders" className="text-[#1e3a5f] font-bold text-[11px] uppercase tracking-widest hover:text-blue-600 hidden lg:block">
                 My Orders
               </Link>
             )}
 
-            {/* Profile / Sign Up Section */}
-            <div className="flex items-center">
+           
+            {/* <div className="flex items-center">
               {user ? (
                 <div
                   onClick={() => navigate('/profile')}
@@ -322,7 +322,7 @@ const Header = () => {
                     Hi, {user?.name ? user.name.split(' ')[0] : (user?.full_name ? user.full_name.split(' ')[0] : 'User')}
                   </span>
 
-                  {/* Logout link separate display for clarity */}
+                 
                   <div className="w-[1px] h-3 bg-gray-300 hidden sm:block"></div>
 
                   <button
@@ -341,7 +341,40 @@ const Header = () => {
                   Sign Up
                 </button>
               )}
-            </div>
+            </div> */}
+
+             <div className="flex items-center">
+      {user ? (
+        /* USER LOGGED IN: Profile + Logout dikhao */
+        <div
+          onClick={() => navigate('/profile')}
+          className="flex items-center gap-3 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-200 cursor-pointer hover:bg-gray-100 hover:border-gray-300 transition-all group"
+        >
+          <span className="text-[11px] font-bold text-[#1e3a5f] uppercase hidden sm:block group-hover:text-blue-600">
+            Hi, {user?.full_name ? user.full_name.split(' ')[0] : (user?.name ? user.name.split(' ')[0] : 'User')}
+          </span>
+
+          <div className="w-[1px] h-3 bg-gray-300 hidden sm:block"></div>
+
+          <button
+            onClick={handleLogout}
+            className="text-[10px] font-bold text-red-500 hover:text-red-700 uppercase"
+          >
+            Logout
+          </button>
+        </div>
+      ) : (
+        /* USER LOGGED OUT: Hamara Naya Modal kholo */
+        <button
+          onClick={() => setIsLoginModalOpen(true)} // 👈 Ab ye naya modal open karega
+          className="bg-[#1e3a5f] text-white px-5 py-2.5 rounded-full text-[12px] font-bold uppercase tracking-widest hover:bg-blue-600 transition-all duration-300 shadow-md flex items-center gap-2"
+        >
+          {/* Google Icon Placeholder - Aap chaho toh ise signup icon se replace kar sakte ho */}
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/button/google.svg" alt="" className="w-4 h-4 bg-white rounded-full p-0.5" />
+          Sign Up
+        </button>
+      )}
+    </div>
           </div>
         </div>
       </div>
