@@ -835,9 +835,9 @@ const Product = ({ product, onBack }) => {
   const getCalculatedPrice = (packLabel) => {
     switch (packLabel) {
       case 'Pack of 20': return basePrice; // 1x
-      case 'Pack of 30': return Math.round(basePrice * 1.4); // 30 pack ka price
-      case 'Pack of 60': return Math.round(basePrice * 2.6); // 60 pack (thoda discount ke saath)
-      case 'Pack of 120': return Math.round(basePrice * 4.8); // 120 pack (zyaada discount)
+      case 'Pack of 30': return Math.round(basePrice * 1.5); // 30 pack ka price
+      case 'Pack of 60': return Math.round(basePrice * 3); // 60 pack (thoda discount ke saath)
+      case 'Pack of 120': return Math.round(basePrice * 6); // 120 pack (zyaada discount)
       default: return basePrice;
     }
   };
