@@ -29,6 +29,8 @@ import ProfilePage from './pages/ProfilePage';
 import LoginModal from './components/LoginModal';
 import ScrollToTop from './components/ScrollToTop';
 import AboutUs from './pages/About/AboutUs';
+import PrivacyPolicy from "./pages/privacy/index"
+import TermsConditions from './pages/TermsConditions/index';
 
 function App() {
   return (
@@ -49,6 +51,9 @@ function App() {
         <Route path="/shop" element={<ProductListing />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/aboutUs" element={<AboutUs />} />
+
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-conditions" element={<TermsConditions />} />
       </Routes>
     </Router>
   );
