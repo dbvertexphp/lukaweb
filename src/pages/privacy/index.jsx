@@ -8,23 +8,32 @@ const PrivacyPolicy = () => {
     const [loading, setLoading] = useState(true);
     const API_URL = import.meta.env.VITE_API_URL;
 
-    useEffect(() => {
-        const fetchPolicy = async () => {
-            try {
-                const res = await axios.get(`${API_URL}/api/CompanyDetails/getPrivacyPolicy`);
-                // Check karein aapka backend 'data' bhej raha hai ya direct object
-                if (res.data.status) {
-                    setContent(res.data.data.privacy_policy || res.data.data.content);
+useEffect(() => {
+    const fetchPolicy = async () => {
+        try {
+            const res = await axios.get(`${API_URL}/api/CompanyDetails/getPrivacyPolicy`);
+            console.log("Privacy API Response:", res.data);
+
+            if (res.data.status) {
+                const dataObj = res.data.data;
+                if (dataObj) {
+                    const contentValue = Array.isArray(dataObj) 
+                        ? dataObj[0]?.privacy_policy 
+                        : dataObj.privacy_policy;
+                        
+                    setContent(contentValue || "No policy content found.");
+                } else {
+                    setContent(res.data.privacy_policy || "Content missing.");
                 }
-            } catch (error) {
-                console.error("Error fetching Privacy Policy", error);
-            } finally {
-                setLoading(false);
             }
-        };
-        fetchPolicy();
-        window.scrollTo(0, 0);
-    }, []);
+        } catch (error) {
+            console.error("Error fetching Policy:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+    fetchPolicy();
+}, []);
 
     return (
         <div className="min-h-screen bg-gray-50">

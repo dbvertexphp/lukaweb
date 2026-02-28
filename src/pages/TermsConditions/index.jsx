@@ -8,22 +8,37 @@ const TermsConditions = () => {
     const [loading, setLoading] = useState(true);
     const API_URL = import.meta.env.VITE_API_URL;
 
-    useEffect(() => {
-        const fetchTerms = async () => {
-            try {
-                const res = await axios.get(`${API_URL}/api/CompanyDetails/getTermsConditions`);
-                if (res.data.status) {
-                    setContent(res.data.data.terms_condition || res.data.data.content);
+   useEffect(() => {
+    const fetchTerms = async () => {
+        try {
+            const res = await axios.get(`${API_URL}/api/CompanyDetails/getTermsConditions`);
+            console.log("Terms API Response:", res.data); // 👈 Console mein check karein structure
+
+            if (res.data.status) {
+                // Backend structures vary, ye 3 possible options check karega:
+                const dataObj = res.data.data;
+                
+                if (dataObj) {
+                    // Option A: res.data.data.terms_condition
+                    // Option B: Agar data array hai toh: res.data.data[0].terms_condition
+                    const contentValue = Array.isArray(dataObj) 
+                        ? dataObj[0]?.terms_condition 
+                        : dataObj.terms_condition;
+                        
+                    setContent(contentValue || "No terms content found.");
+                } else {
+                    // Option C: res.data.terms_condition (Agar seedha data mein ho)
+                    setContent(res.data.terms_condition || "Content is missing in API.");
                 }
-            } catch (error) {
-                console.error("Error fetching Terms", error);
-            } finally {
-                setLoading(false);
             }
-        };
-        fetchTerms();
-        window.scrollTo(0, 0);
-    }, []);
+        } catch (error) {
+            console.error("Error fetching Terms:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+    fetchTerms();
+}, []);
 
     return (
         <div className="min-h-screen bg-gray-50">
