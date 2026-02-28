@@ -15,7 +15,8 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("user", JSON.stringify(userData));
     localStorage.setItem("token", token);
     setUser(userData);
-    setIsLoginModalOpen(false); // Login hote hi modal band ho jaye
+    setIsLoginModalOpen(false);
+     window.location.reload(); // Login hote hi modal band ho jaye
   };
 
   const logoutUser = () => {

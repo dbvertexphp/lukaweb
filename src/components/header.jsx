@@ -147,7 +147,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
 
 const Header = () => {
-  const { users, setIsLoginModalOpen } = useAuth();
+  const { users, logoutUser, setIsLoginModalOpen } = useAuth();
   const [isSearchOpen, setIsSearchOpen] = useState(false); // Search bar kholne ke liye
   const [searchQuery, setSearchQuery] = useState(""); // Typing text store karne ke liye
   const [user, setUser] = useState(null);
@@ -171,7 +171,7 @@ const Header = () => {
   };
 
   const handleCartClick = () => {
-    if (!users) {
+    if (!user) {
       // Agar login nahi hai toh modal open karein
       setIsLoginModalOpen(true);
     } else {
