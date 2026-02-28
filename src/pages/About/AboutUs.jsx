@@ -1,8 +1,10 @@
 import React from 'react';
 import Header from "../../components/header"; // Header import kiya gaya hai
 import Footer from '../../components/Footer';
+import { useNavigate } from 'react-router-dom';
 
 const AboutUs = () => {
+  const navigate = useNavigate();
   return (
     <div className="font-sans text-[#0b143d]">
       {/* 1. Header Section */}
@@ -101,7 +103,7 @@ const AboutUs = () => {
                 absolutely <strong>no secret toxins.</strong> Just pure cleaning power 
                 delivered in a small, smart pod.
             </p>
-            <button className="bg-[#0b143d] text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest hover:bg-[#1a2b7a] transition-all transform hover:scale-105 active:scale-95 shadow-lg">
+            <button onClick={() => navigate('/shop')} className="bg-[#0b143d] text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest hover:bg-[#1a2b7a] transition-all transform hover:scale-105 active:scale-95 shadow-lg">
                 Shop the Collection
             </button>
         </div>

@@ -50,7 +50,7 @@ const OrderHistory = () => {
           <div className="bg-white p-20 rounded-[4rem] text-center shadow-sm border border-blue-50">
             <span className="text-6xl block mb-4">📦</span>
             <p className="font-black text-2xl uppercase opacity-20">No orders found</p>
-            <button onClick={() => window.location.href='/'} className="mt-6 bg-[#4b70e2] text-white px-8 py-3 rounded-full font-bold uppercase text-xs">Start Shopping</button>
+            <button onClick={() => window.location.href='/shop'} className="mt-6 bg-[#4b70e2] text-white px-8 py-3 rounded-full font-bold uppercase text-xs">Start Shopping</button>
           </div>
         ) : (
           <div className="grid gap-8">

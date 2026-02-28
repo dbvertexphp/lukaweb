@@ -743,8 +743,10 @@ import Footer from "../../components/Footer"
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion'; // Naya import animation ke liye
+import { useLocation } from 'react-router-dom';
 
 const Home = () => {
+   const { hash } = useLocation();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [activeFaq, setActiveFaq] = useState(null);
   const navigate = useNavigate();
@@ -785,6 +787,18 @@ const Home = () => {
     };
     fetchProducts();
   }, []);
+
+  useEffect(() => {
+    if (hash === '#faq-section') {
+      const element = document.getElementById('faq-section');
+      if (element) {
+        // Thoda sa delay taaki page poora load ho jaye
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, [hash]); // Jab bhi hash badlega ye chalega
 
   const faqData = [
     { question: "Will LUKA PODS work with my specific washing machine type?", answer: "Absolutely! LUKA PODS are engineered for versatility. They are 100% compatible with both Top-load and Front-load fully automatic machines." },
@@ -1010,7 +1024,7 @@ const Home = () => {
       </section>
 
       {/* 10. FAQ (Simple Reveal) */}
-      <section className="w-full bg-[#fcfcfc] py-24 px-4 border-t border-gray-100">
+      <section  id="faq-section" className="w-full bg-[#fcfcfc] py-24 px-4 border-t border-gray-100">
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeInUp} className="text-center mb-16">
             <h2 className="text-4xl font-black text-[#1e3a5f] mb-4 uppercase italic">Support Center</h2>
